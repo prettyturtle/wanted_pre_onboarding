@@ -12,11 +12,12 @@ class CityListViewController: UIViewController {
     // MARK: - UI Components
     private lazy var cityTableView: UITableView = {
         let tableView = UITableView()
+        tableView.rowHeight = 150.0
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(
-            UITableViewCell.self,
-            forCellReuseIdentifier: "cell"
+            CityTableViewCell.self,
+            forCellReuseIdentifier: CityTableViewCell.identifier
         )
         return tableView
     }()
@@ -54,12 +55,13 @@ extension CityListViewController: UITableViewDataSource {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: "cell",
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: CityTableViewCell.identifier,
             for: indexPath
-        ) as UITableViewCell
-        cell.textLabel?.text = City.allCases[indexPath.row].text
-        cell.accessoryType = .disclosureIndicator
+        ) as? CityTableViewCell else { return UITableViewCell() }
+        let city = City.allCases[indexPath.row]
+        cell.selectionStyle = .none
+        cell.setupView(city: city)
         return  cell
     }
 }
