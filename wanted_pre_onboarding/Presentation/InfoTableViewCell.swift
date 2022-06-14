@@ -10,6 +10,7 @@ import UIKit
 class InfoTableViewCell: UITableViewCell {
     static let identifier = "InfoTableViewCell"
     
+    // MARK: - UI Components
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .semibold)
@@ -22,6 +23,7 @@ class InfoTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Setup Method
     func setupView(title: String, value: String) {
         setupAttribute()
         setupLayout()

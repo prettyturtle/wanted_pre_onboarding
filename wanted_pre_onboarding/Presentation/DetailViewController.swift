@@ -9,6 +9,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    // MARK: - UI Components
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 4.0
@@ -26,10 +27,12 @@ class DetailViewController: UIViewController {
     }()
     private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
     
+    // MARK: - Properties
     private let city: City
     private let informations = Information.allCases
     private var weatherInfo: WeatherInfo?
     
+    // MARK: - init
     init(city: City) {
         self.city = city
         super.init(nibName: nil, bundle: nil)
@@ -38,6 +41,7 @@ class DetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -73,6 +77,7 @@ extension DetailViewController: UITableViewDataSource {
 
 // MARK: - Logics
 private extension DetailViewController {
+    /// 날씨 정보 API를 이용해 도시의 날씨 정보를 받아 화면을 갱신하는 메서드
     func fetchWeatherInfo() {
         activityIndicator.startAnimating()
         Network().get(cityName: city.rawValue) { [weak self] result in
@@ -89,6 +94,11 @@ private extension DetailViewController {
         }
     }
     
+    /// 화면을 갱신하는 메서드
+    ///
+    /// 캐시된 정보가 있다면 캐시된 이미지를 활용한다.
+    /// 캐시된 정보가 없다면 API로부터 이미지를 받아온다
+    /// - info: 날씨 정보
     func updateView(info: WeatherInfo) {
         weatherInfo = info
         weatherInfoTableView.reloadData()
@@ -108,6 +118,9 @@ private extension DetailViewController {
         }
     }
     
+    /// 아이콘 이름으로 이미지를 받아오는 메서드
+    ///
+    /// - icon: 아이콘 이름
     func fetchImage(icon: String) -> UIImage? {
         let urlString = "https://openweathermap.org/img/wn/\(icon)@2x.png"
         guard let url = URL(string: urlString) else { return nil }
@@ -120,6 +133,9 @@ private extension DetailViewController {
         }
     }
     
+    /// 캐시된 이미지가 있는지 확인하여 Bool값을 반환하는 메서드
+    ///
+    /// - icon: 아이콘 이름
     func checkCachedImage(icon: String) -> Bool {
         if ImageCacheManager.shared.object(forKey: icon as NSString) != nil {
             return true
@@ -128,6 +144,10 @@ private extension DetailViewController {
         }
     }
     
+    /// 이미지를 캐싱하는 메서드
+    ///
+    /// - image: 저장할 이미지
+    /// - key: 저장할 키 값
     func saveCacheImage(image: UIImage, key: String) {
         ImageCacheManager.shared.setObject(image, forKey: key as NSString)
     }

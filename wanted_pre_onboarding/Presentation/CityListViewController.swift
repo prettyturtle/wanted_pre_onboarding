@@ -9,6 +9,7 @@ import UIKit
 
 class CityListViewController: UIViewController {
     
+    // MARK: - UI Components
     private lazy var cityTableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
@@ -20,6 +21,7 @@ class CityListViewController: UIViewController {
         return tableView
     }()
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
