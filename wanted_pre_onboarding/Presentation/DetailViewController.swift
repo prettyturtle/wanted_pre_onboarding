@@ -89,7 +89,7 @@ private extension DetailViewController {
                     self.activityIndicator.stopAnimating()
                 }
             case .failure(let error):
-                print("ERROR \(error.localizedDescription)")
+                self.showAlert(title: "에러", message: "\(error.detail)")
             }
         }
     }
@@ -150,6 +150,24 @@ private extension DetailViewController {
     /// - key: 저장할 키 값
     func saveCacheImage(image: UIImage, key: String) {
         ImageCacheManager.shared.setObject(image, forKey: key as NSString)
+    }
+    
+    /// 날씨 정보를 받아오는 도중에 에러가 발생할 경우, 얼럿을 띄우는 메서드
+    ///
+    /// - title: 얼럿에 보여질 타이틀
+    /// - message: 얼럿에 보여질 에러 설명
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
     }
 }
 
