@@ -92,12 +92,23 @@ private extension DetailViewController {
     func updateView(info: WeatherInfo) {
         weatherInfo = info
         weatherInfoTableView.reloadData()
-        let icon = fetchImage(icon: info.weather.first?.icon)
-        iconImageView.image = icon
+        guard let icon = info.weather.first?.icon else { return }
+        
+        if checkCachedImage(icon: icon) {
+            let image = ImageCacheManager.shared.object(forKey: icon as NSString)
+            iconImageView.image = image
+        } else {
+            DispatchQueue.global(qos: .background).async {
+                guard let image = self.fetchImage(icon: icon) else { return }
+                self.saveCacheImage(image: image, key: icon)
+                DispatchQueue.main.async {
+                    self.iconImageView.image = image
+                }
+            }
+        }
     }
     
-    func fetchImage(icon: String?) -> UIImage? {
-        guard let icon = icon else { return nil }
+    func fetchImage(icon: String) -> UIImage? {
         let urlString = "https://openweathermap.org/img/wn/\(icon)@2x.png"
         guard let url = URL(string: urlString) else { return nil }
         do {
@@ -107,6 +118,18 @@ private extension DetailViewController {
         } catch {
             return nil
         }
+    }
+    
+    func checkCachedImage(icon: String) -> Bool {
+        if ImageCacheManager.shared.object(forKey: icon as NSString) != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func saveCacheImage(image: UIImage, key: String) {
+        ImageCacheManager.shared.setObject(image, forKey: key as NSString)
     }
 }
 
