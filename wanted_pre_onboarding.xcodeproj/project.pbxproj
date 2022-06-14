@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B0386D82859074C0028667F /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0386D72859074C0028667F /* CityTableViewCell.swift */; };
 		6B7104892856010E00D72B9F /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7104882856010E00D72B9F /* City.swift */; };
 		6B71048B2856012900D72B9F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B71048A2856012900D72B9F /* Network.swift */; };
 		6B71048D2856067900D72B9F /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B71048C2856067900D72B9F /* WeatherInfo.swift */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B0386D6285905DF0028667F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6B0386D72859074C0028667F /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
 		6B7104882856010E00D72B9F /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		6B71048A2856012900D72B9F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		6B71048C2856067900D72B9F /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				6BE5D5612855F7EE007A56B7 /* CityListViewController.swift */,
+				6B0386D72859074C0028667F /* CityTableViewCell.swift */,
 				6B71048E2856106500D72B9F /* DetailViewController.swift */,
 				6B7104902856231700D72B9F /* InfoTableViewCell.swift */,
 			);
@@ -95,6 +99,7 @@
 		6BE5D5512855F7EE007A56B7 = {
 			isa = PBXGroup;
 			children = (
+				6B0386D6285905DF0028667F /* README.md */,
 				6BE5D55C2855F7EE007A56B7 /* wanted_pre_onboarding */,
 				6BE5D55B2855F7EE007A56B7 /* Products */,
 			);
@@ -205,6 +210,7 @@
 				6B7104892856010E00D72B9F /* City.swift in Sources */,
 				6BE5D5602855F7EE007A56B7 /* SceneDelegate.swift in Sources */,
 				6B71048F2856106500D72B9F /* DetailViewController.swift in Sources */,
+				6B0386D82859074C0028667F /* CityTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
