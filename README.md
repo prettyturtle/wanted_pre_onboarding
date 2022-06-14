@@ -2,6 +2,10 @@
 
 ### 날씨 정보 APP
 
+### 결과
+
+![](resultImage.gif)
+
 ### 프레임워크
 - UIKit
 
