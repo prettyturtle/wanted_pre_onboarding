@@ -26,6 +26,7 @@ struct Network {
         var urlComponents = URLComponents(string: urlString)
         urlComponents?.queryItems = [
             URLQueryItem(name: "q", value: cityName),
+            URLQueryItem(name: "lang", value: "kr"),
             URLQueryItem(name: "appid", value: "72b679ddb227219023234c815867edb3")
         ]
         
