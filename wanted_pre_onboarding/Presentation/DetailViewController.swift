@@ -89,7 +89,9 @@ private extension DetailViewController {
                     self.activityIndicator.stopAnimating()
                 }
             case .failure(let error):
-                self.showAlert(title: "에러", message: "\(error.detail)")
+                DispatchQueue.main.async {
+                    self.showAlert(title: "에러", message: "\(error.detail)")
+                }
             }
         }
     }
