@@ -33,13 +33,13 @@ enum Information: String, CaseIterable {
     func getInfo(weatherInfo: WeatherInfo?) -> String {
         guard let weatherInfo = weatherInfo else { return "" }
         switch self {
-        case .temp: return "\(weatherInfo.main.temp)"
-        case .feelsLike: return "\(weatherInfo.main.feelsLike)"
-        case .humidity: return "\(weatherInfo.main.humidity)"
-        case .tempMin: return "\(weatherInfo.main.tempMin)"
-        case .tempMax: return "\(weatherInfo.main.tempMax)"
-        case .pressure: return "\(weatherInfo.main.pressure)"
-        case .speed: return "\(weatherInfo.wind.speed)"
+        case .temp: return "\(weatherInfo.main.temp)℃"
+        case .feelsLike: return "\(weatherInfo.main.feelsLike)℃"
+        case .humidity: return "\(weatherInfo.main.humidity)%"
+        case .tempMin: return "\(weatherInfo.main.tempMin)℃"
+        case .tempMax: return "\(weatherInfo.main.tempMax)℃"
+        case .pressure: return "\(weatherInfo.main.pressure)㍱"
+        case .speed: return "\(weatherInfo.wind.speed)/sec"
         case .description: return weatherInfo.weather.first?.description ?? ""
         }
     }

@@ -18,7 +18,7 @@ class InfoTableViewCell: UITableViewCell {
     }()
     private lazy var valueLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16.0, weight: .light)
+        label.font = .systemFont(ofSize: 16.0, weight: .black)
         label.numberOfLines = 0
         return label
     }()
