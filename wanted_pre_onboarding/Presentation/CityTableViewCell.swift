@@ -35,6 +35,7 @@ class CityTableViewCell: UITableViewCell {
         imageView.image = UIImage(systemName: "chevron.right")
         return imageView
     }()
+    private lazy var activityIndicator = UIActivityIndicatorView(style: .medium)
     
     // MARK: - Setup Method
     func setupView(city: City) {
@@ -54,15 +55,22 @@ class CityTableViewCell: UITableViewCell {
 private extension CityTableViewCell {
     /// 날씨 정보 API를 이용해 도시의 날씨 정보를 받아 화면을 갱신하는 메서드
     func fetchWeatherInfo(city: City) {
+        activityIndicator.startAnimating()
         Network().get(cityName: city.rawValue) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let weatherInfo):
                 DispatchQueue.main.async {
                     self.updateView(info: weatherInfo)
+                    self.activityIndicator.stopAnimating()
                 }
-            case .failure(let error):
-                print("ERROR: \(error.detail)")
+            case .failure(_):
+                DispatchQueue.main.async {
+                    self.currentTempLabel.text = "🌡 "
+                    self.currentHumidityLabel.text = "💧 "
+                    self.iconImageView.image = UIImage(systemName: "xmark")
+                    self.activityIndicator.stopAnimating()
+                }
             }
         }
     }
@@ -134,6 +142,7 @@ private extension CityTableViewCell {
     func setupLayout() {
         [
             iconImageView,
+            activityIndicator,
             nameLabel,
             currentTempLabel,
             currentHumidityLabel,
@@ -161,6 +170,12 @@ private extension CityTableViewCell {
             iconImageView
                 .heightAnchor
                 .constraint(equalToConstant: 100.0),
+            activityIndicator
+                .centerXAnchor
+                .constraint(equalTo: iconImageView.centerXAnchor),
+            activityIndicator
+                .centerYAnchor
+                .constraint(equalTo: iconImageView.centerYAnchor),
             nameLabel
                 .leadingAnchor
                 .constraint(
