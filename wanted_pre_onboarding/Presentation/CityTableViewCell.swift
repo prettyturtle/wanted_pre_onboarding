@@ -81,7 +81,7 @@ private extension CityTableViewCell {
     /// 캐시된 정보가 없다면 API로부터 이미지를 받아온다
     /// - info: 날씨 정보
     func updateView(info: WeatherInfo) {
-        currentTempLabel.text = "🌡 \(info.main.temp)℃"
+        currentTempLabel.text = "🌡 " + info.main.temp.celsius.temperatureFormat
         currentHumidityLabel.text = "💧 \(info.main.humidity)%"
         
         guard let icon = info.weather.first?.icon else { return }
