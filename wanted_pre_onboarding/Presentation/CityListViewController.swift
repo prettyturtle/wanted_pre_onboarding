@@ -10,9 +10,19 @@ import UIKit
 class CityListViewController: UIViewController {
     
     // MARK: - UI Components
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(
+            self,
+            action: #selector(beginRefresh),
+            for: .valueChanged
+        )
+        return refreshControl
+    }()
     private lazy var cityTableView: UITableView = {
         let tableView = UITableView()
         tableView.rowHeight = 150.0
+        tableView.refreshControl = refreshControl
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(
@@ -63,6 +73,14 @@ extension CityListViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.setupView(city: city)
         return  cell
+    }
+}
+
+// MARK: - @objc Methods
+private extension CityListViewController {
+    @objc func beginRefresh() {
+        cityTableView.reloadData()
+        refreshControl.endRefreshing()
     }
 }
 
